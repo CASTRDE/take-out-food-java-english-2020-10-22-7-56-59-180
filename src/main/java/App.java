@@ -75,7 +75,7 @@ public class App {
         if (count >= 30 && count - 6 <= halfPromotePrice) {
             sb.append("Promotion used:\n");
             sb.append("Deduct 6 yuan when the order reaches 30 yuan");
-            sb.append("，saving 6 yuan\n");
+            sb.append(", saving 6 yuan\n");
             sb.append("-----------------------------------\n");
             total -= 6;
         } else {
@@ -84,12 +84,12 @@ public class App {
                 sb.append("Promotion used:\n");
                 sb.append("Half price for certain dishes ");
                 sb.append(halfItemName);
-                sb.append("，saving " + outPrice(discountTot) + " yuan\n");
+                sb.append(", saving " + outPrice(discountTot) + " yuan\n");
                 sb.append("-----------------------------------\n");
                 total = halfPromotePrice;
             }
         }
-        sb.append("Total：" + outPrice(total) + " yuan\n");
+        sb.append("Total:" + outPrice(total) + " yuan\n");
         sb.append("===================================");
         return sb.toString();
     }
