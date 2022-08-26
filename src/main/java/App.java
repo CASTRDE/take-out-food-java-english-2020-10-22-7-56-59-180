@@ -34,7 +34,7 @@ public class App {
             recordOrder.put(itemId, Integer.parseInt(data[1]));
             if (mp.containsKey(itemId)) {
                 Item currItem = mp.get(itemId);
-                String record = currItem.getName() + " x " + recordOrder.get(itemId) + " = " + outPrice(currItem.getPrice()*recordOrder.get(itemId)) + " yuan\n";
+                String record = currItem.getName() + " x " + recordOrder.get(itemId) + " = " + totalPrice(currItem.getPrice()*recordOrder.get(itemId)) + " yuan\n";
                 sb.append(record);
             }
         }
@@ -53,6 +53,7 @@ public class App {
                 break;
             }
         }
+
         double discountTot = 0;
         String halfItemName = "";
         if (halfPromote != null) {
@@ -70,6 +71,7 @@ public class App {
                 }
             }
         }
+
         double total = count;
         double halfPromotePrice = count - discountTot;
         if (count >= 30 && count - 6 <= halfPromotePrice) {
@@ -84,27 +86,25 @@ public class App {
                 sb.append("Promotion used:\n");
                 sb.append("Half price for certain dishes ");
                 sb.append(halfItemName);
-                sb.append(", saving " + outPrice(discountTot) + " yuan\n");
+                sb.append(", saving " + totalPrice(discountTot) + " yuan\n");
                 sb.append("-----------------------------------\n");
                 total = halfPromotePrice;
             }
         }
-        sb.append("Total:" + outPrice(total) + " yuan\n");
+        sb.append("Total:" + totalPrice(total) + " yuan\n");
         sb.append("===================================");
         return sb.toString();
     }
 
-    public String outPrice(double price) {
-        String outPrice = String.valueOf(price);
-        outPrice = outPrice.replaceAll("0+?$", "");
-        outPrice = outPrice.replaceAll("[.]$", "");
-        return outPrice;
+    public String totalPrice(double price) {
+        String totalPrice = String.valueOf(price);
+        totalPrice = totalPrice.replaceAll("0+?$", "");
+        totalPrice = totalPrice.replaceAll("[.]$", "");
+        return totalPrice;
     }
 
     interface SALE_PROMOTION_TYPE {
         String BUY_30_SAVE_6_YUAN = "BUY_30_SAVE_6_YUAN";
         String HALF_PRICE_FOR_SPECIFIED_ITEMS = "50%_DISCOUNT_ON_SPECIFIED_ITEMS";
     }
-
-
 }
