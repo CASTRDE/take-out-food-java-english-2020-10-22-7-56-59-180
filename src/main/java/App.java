@@ -22,6 +22,7 @@ public class App {
         String title = "============= Order details =============\n";
         sb.append(title);
 
+        //checks the mapping of items from TestData
         List<Item> menu = itemRepository.findAll();
         Map<String, Integer> recordOrder = new HashMap<>();
         Map<String, Item> mp = new HashMap<>();
@@ -40,7 +41,7 @@ public class App {
         }
         sb.append("-----------------------------------\n");
 
-
+        //checks the promotion available from TestData
         List<SalesPromotion> promotions = salesPromotionRepository.findAll();
         double count = 0;
         for (Map.Entry<String, Integer> e : recordOrder.entrySet()) {
@@ -53,7 +54,7 @@ public class App {
                 break;
             }
         }
-
+        //checks it item is eligible for 50% discount
         double discountTot = 0;
         String halfItemName = "";
         if (halfPromote != null) {
@@ -71,7 +72,7 @@ public class App {
                 }
             }
         }
-
+        //checks if items is eligible for 6 yuan off
         double total = count;
         double halfPromotePrice = count - discountTot;
         if (count >= 30 && count - 6 <= halfPromotePrice) {
@@ -95,7 +96,7 @@ public class App {
         sb.append("===================================");
         return sb.toString();
     }
-
+    //compute final price
     public String totalPrice(double price) {
         String totalPrice = String.valueOf(price);
         totalPrice = totalPrice.replaceAll("0+?$", "");
@@ -103,6 +104,7 @@ public class App {
         return totalPrice;
     }
 
+    //initialize promotion values for checking
     interface SALE_PROMOTION_TYPE {
         String BUY_30_SAVE_6_YUAN = "BUY_30_SAVE_6_YUAN";
         String HALF_PRICE_FOR_SPECIFIED_ITEMS = "50%_DISCOUNT_ON_SPECIFIED_ITEMS";
